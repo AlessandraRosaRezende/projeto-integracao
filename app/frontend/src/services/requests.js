@@ -18,19 +18,23 @@ export const requestLogin = async (endpoint, body) => {
   return data;
 };
 
-export const requestUsers = async (endpoint, token) => {
+export const requestUsers = async (endpoint, tokenWithoutBearer) => {
   // se for o admin, traz todos os usuários
   // se for um usuário comum, traz apenas ele mesmo
 
+  const token = `Bearer ${tokenWithoutBearer}`;
   const role = localStorage.getItem('role');
   const userId = localStorage.getItem('id');
+  const options = {
+    headers: { 'Authorization': token },
+  }
 
   if (role === 'admin') {
-    const { data } = await api.get(endpoint, token);
+    const { data } = await api.get(endpoint, options);
     return data;
   }
-  const { data } = await api.get(`${endpoint}/${userId}`, token);
-  
+  const { data } = await api.get(`${endpoint}/${userId}`, options);
+
   return data;
 }
 

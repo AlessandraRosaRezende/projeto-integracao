@@ -10,8 +10,7 @@ const Users = () => {
 
   // Recupera o usuário logado do localStorage
   const loggedInUser = JSON.parse(localStorage.getItem('user'));
-  const token = localStorage.getItem('token') || false;  
-  console.log(token);
+  const token = localStorage.getItem('token') || false;
 
   useEffect(() => {
     // Chama a função de busca de usuários apenas se o usuário estiver autenticado
@@ -19,23 +18,24 @@ const Users = () => {
       const role = localStorage.getItem('role') || false;
 
       fetchUsers();
-    
+
       setIsAdm(role === 'admin');
       setRole(role);
     }
   }, [loggedInUser]);
 
-  
+
   const fetchUsers = async () => {
     try {
       const users = await requestUsers('/users', token);
       setUsers(users);
       setError(null); // Limpa qualquer erro anterior se a busca for bem-sucedida
-      console.log("users", users);
     } catch (error) {
       setError(error.response.data.message);
     }
   }
+
+  if (!loggedInUser) return <Navigate to="/login" />;
 
   return (
     <div>
@@ -55,7 +55,7 @@ const Users = () => {
                     width="50"
                   />
                 )}
-                {user.username} 
+                {user.username}
                 {user.email}
                 {user.city}
                 {user.state}

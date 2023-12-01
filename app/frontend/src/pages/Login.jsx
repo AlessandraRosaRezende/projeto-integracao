@@ -19,9 +19,10 @@ const Login = () => {
 
       const { role, userId } = await requestData('/login/role', { email, password });
 
-      localStorage.setItem('token',  user.token);
-      localStorage.setItem('role',  role);
-      localStorage.setItem('id',  userId);
+      localStorage.setItem('token', user.token);
+      localStorage.setItem('role', role);
+      localStorage.setItem('id', userId);
+      JSON.stringify(localStorage.setItem('user', userId), null, 2);
 
       setIsLogged(true);
     } catch (error) {
@@ -34,8 +35,6 @@ const Login = () => {
     setFailedTryLogin(false);
   }, [email, password]);
 
-  console.log(isLogged);
-
   if (isLogged) return <Navigate to="/users" />;
 
   return (
@@ -47,16 +46,16 @@ const Login = () => {
             <input
               className="login__login_input"
               type="text"
-              value={ email }
-              onChange={ ({ target: { value } }) => setEmail(value) }
+              value={email}
+              onChange={({ target: { value } }) => setEmail(value)}
               placeholder="Login"
             />
           </label>
           <label htmlFor="password-input">
             <input
               type="password"
-              value={ password }
-              onChange={ ({ target: { value } }) => setPassword(value) }
+              value={password}
+              onChange={({ target: { value } }) => setPassword(value)}
               placeholder="Senha"
             />
           </label>
@@ -74,7 +73,7 @@ const Login = () => {
           }
           <button
             type="submit"
-            onClick={ (event) => login(event) }
+            onClick={(event) => login(event)}
           >
             Entrar
           </button>
