@@ -1,0 +1,25 @@
+{
+  "name": "integracao-front-back",
+  "version": "1.0.0",
+  "description": "Projeto de integração entre front e back-end",
+  "main": "index.js",
+  "scripts": {
+    "install:front": "cd ./app/frontend && npm install",
+    "install:back": "cd ./app/backend && npm install",
+    "install:apps": "npm run install:front && npm run install:back",
+    "compose:up": "cd app && docker-compose up -d --build",
+    "compose:down": "cd app && docker-compose down --remove-orphans"
+  },
+  "author": "Alessandra",
+  "devDependencies": {
+    "axios": "0.26.0",
+    "mysql2": "2.3.3",
+    "sequelize": "6.25.5",
+    "sequelize-cli": "6.4.1"
+  },
+  "dependencies": {
+    "camelcase": "6.3.0",
+    "http-status-codes": "2.2.0",
+    "jsonwebtoken": "8.5.1"
+  }
+}
