@@ -55,10 +55,10 @@ const Users = () => {
                     width="50"
                   />
                 )}
-                {user.username}
-                {user.email}
-                {user.city}
-                {user.state}
+                <p>Usuário: {user && user.username}</p>
+                <p>Email: {user && user.email}</p>
+                <p>Cidade: {user && user.city}</p>
+                <p>Estado: {user && user.state}</p>
               </li>
             ))}
           </ul>
